@@ -1,0 +1,45 @@
+services:
+  model_splitter:
+    build:
+      context: .
+      dockerfile: Dockerfile_model_splitter
+    container_name: model_splitter_container
+    image: model_splitter:latest
+    ports:
+      - "8000:8000"
+    depends_on:
+      - robot_inference
+      - edge_inference
+    volumes:
+      - saved_models:/app/model_splitter/saved_models
+    networks:
+      - app_net
+
+  robot_inference:
+    build:
+      context: .
+      dockerfile: Dockerfile_robot_inference
+    container_name: robot_inference_container
+    image: robot_inference:latest
+    volumes:
+      - saved_models:/app/robot_inference/saved_models
+    networks:
+      - app_net
+
+  edge_inference:
+    build:
+      context: .
+      dockerfile: Dockerfile_edge_inference
+    container_name: edge_inference_container
+    image: edge_inference:latest
+    volumes:
+      - saved_models:/app/edge_inference/saved_models
+    networks:
+      - app_net
+
+networks:
+  app_net:
+    driver: bridge
+
+volumes:
+  saved_models:

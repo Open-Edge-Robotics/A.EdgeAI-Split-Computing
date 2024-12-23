@@ -1,0 +1,14 @@
+FROM python:3.12-slim
+
+WORKDIR /app
+RUN apt-get update && apt-get install -y python3-pip && rm -rf /var/lib/apt/lists/*
+
+RUN pip3 install --no-cache-dir fastapi uvicorn pydantic numpy
+RUN pip3 install --no-cache-dir onnxruntime-gpu --extra-index-url https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/onnxruntime-cuda-12/pypi/simple/
+
+COPY edge_inference ./edge_inference
+COPY common ./edge_inference/common
+
+WORKDIR /app/edge_inference
+EXPOSE 8002
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8002"]
