@@ -84,7 +84,7 @@ A.EdgeAI-Split-Computing
 
 Installation and Usage
 ----------------------
-1.Clone the Repository:
+1. Clone the Repository:
 ```bash
 $ git clone https://github.com/Open-Edge-Robotics/A.EdgeAI-Split-Computing.git
 $ cd A.EdgeAI-Split-Computing
