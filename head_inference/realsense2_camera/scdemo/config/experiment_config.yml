@@ -1,0 +1,8 @@
+server:
+  robot_inference_url: "http://127.0.0.1:8001"
+  edge_inference_url: "http://113.198.244.133:8002"
+experiment:
+  repeat: 100
+  timeout: 5.0
+parameters:
+  quantization_bits: 4
